@@ -1,46 +1,51 @@
 /**
- * @author 임승한(lim_designer@naver.com)
  * 파일명 : ReadFile.java
- * 작성일 : 2015. 7. 20.
- * 파일설명 : 카카오톡 대화 내용 파일의 내용을 읽어온다. 
+ * 작성일 : 2015. 7. 21.
+ * 파일설명 : 
  */
 package com.cdg.ReadFile;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.cdg.MavenProject.AppTest;
-
+/**
+ * @author 임승한(lim_designer@naver.com)
+ */
 public class ReadFile {
-	public static void main(String[] args) {
+	private String fDir;
+	private String fName;
+	private List<String> list = new ArrayList<String>();
 
-		/*
-		 * String path = AppTest.class.getResource("").getPath(); // 현재 클래스의 절대
-		 * 경로를 가져온다. System.out.println(path); // 절대 경로가 출력됨 File
-		 * fileInSamePackage = new File(path + "conversation.txt"); // path 폴더 내의
-		 * conversation.txt 를 가리킨다.
-		 */
-		
-		String fDir = "/C:/Dev/workspace/MavenProject/target/classes/com/cdg/ReadFile/";
-		String fName1 = "conversation.txt";
-		File f;
+	// ReadFile Class 생성자
+	public ReadFile(String fDir, String fName) {
+		this.fDir = fDir;
+		this.fName = fName;
+	}
+
+	// 파일 읽는 매서드
+	public List<String> start() {
+		File file = new File(fDir + fName);
 
 		try {
 			// File 객체 생성(존재하는 파일)
-			f = new File(fDir + fName1);
-
 			// 파일 읽기
-			FileReader fileReader = new FileReader(f);
+			FileReader fileReader = new FileReader(file);
 			BufferedReader reader = new BufferedReader(fileReader);
+			String line;
 
-			String line = null;
 			while ((line = reader.readLine()) != null) {
-				System.out.println(line);
+				list.add(line);
+				// System.out.println(line);
 			}
 			reader.close();
-			
+			fileReader.close();
 		} catch (Exception ex) {
-			
 			System.out.println(ex.getMessage());
 		}
+		return list;
 	}
+
 }

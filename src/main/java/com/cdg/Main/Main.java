@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.cdg.Analyzer.AnalyzerPeople;
 import com.cdg.Analyzer.AnalyzerTime;
 import com.cdg.ReadFile.ReadFile;
 
@@ -23,8 +24,11 @@ public class Main {
 
 		ReadFile readFile = new ReadFile();
 
+		// AnalyzerTime
 		List<String> line = new ArrayList<String>();
-
+		// AnalyzerPeople
+		//List<String> listPeople = new ArrayList<String>();
+		
 		File file = new File("/C:/Dev/workspace/FileReadTest/src/conversation.txt");
 		
 		// Class ReadFile의 readFile의 매서드를 통해 읽은 파일 내용을 return 받는다.
@@ -32,9 +36,12 @@ public class Main {
 
 		// 읽어온 카카오톡 내용을(List) Class AnalyserTime 에 넘긴다.
 		AnalyzerTime hotTime = new AnalyzerTime(readFile.readFile(file));
-		
+		//System.out.println(readFile.readFile(file));
 		System.out.println("가장많이 대화하는 시간대 : " + hotTime.start());
-
+		
+		AnalyzerPeople analyzerPeople = new AnalyzerPeople(readFile.readFile(file));
+		analyzerPeople.start();
+		//System.out.println(readFile.readFile(file));
 	}
 
 }
